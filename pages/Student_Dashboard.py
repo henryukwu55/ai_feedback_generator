@@ -171,7 +171,7 @@ def student_dashboard():
         st.warning("Wrong Student ID. Try again.")
         return
 
-    if st.button("Retrieve Assignments"):
+    if st.button("Retrieve assignments"):
         files = search_files_by_student_id(student_id_input)
         unique_files = list(set(files))
         if unique_files:
@@ -182,7 +182,9 @@ def student_dashboard():
     st.header("View AI Feedback")
     conn = get_db_connection()
     cursor = conn.cursor()
-
+    
+    # Course selection
+    selected_course = "Nil"  # Initialize with default value
     # Course selection
     cursor.execute("""
         SELECT course_id FROM submissions 
@@ -194,7 +196,9 @@ def student_dashboard():
         courses = ["Nil"] + db_courses
         selected_course = st.selectbox("Select Course", courses, index=0)
 
+    
     if selected_course != "Nil":
+        selected_assignment = "Nil - Nil"  # Initialize with default
         # Assignment selection
         cursor.execute("""
             SELECT assignment_id, assignment_name 
