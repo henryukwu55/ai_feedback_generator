@@ -1,0 +1,80 @@
+.qodo
+*.pyc
+venv/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Azure/Blob storage
+azurecredentials.json
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+*.db-journal
+
+# Local development
+*.xlsx
+*.csv
+*.json
+grading_results/
+delete_all_data.py
+check_versions.py
+
+# Session files
+*.session
+
+# Exceptions
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Security
+*.pem
+*.key
+*.cert
+credentials.json
+
+# Large files
+*.pdf
+*.doc
+*.docx
+*.zip
+*.tar.gz
+
+# Canvas API cache
+canvas_cache/
