@@ -2,6 +2,11 @@
 *.pyc
 venv/
 
+# Ignore large media files
+assets/*.mp4
+assets/*.webm
+
+
 # Environment files
 .env
 .env.local
