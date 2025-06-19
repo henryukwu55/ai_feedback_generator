@@ -19,6 +19,36 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 
+# Add this new function to handle text formatting
+def format_text_for_display(raw_text):
+    """
+    Use AI to reformat text for better readability
+    Returns formatted text or original text if error occurs
+    """
+    system_prompt = """You are a document formatting expert. Reformart the provided text with proper:
+    - Paragraph separation
+    - List formatting
+    - Heading hierarchy
+    - Consistent indentation
+    - Clear section breaks
+    Preserve all original content while improving readability. Output should be plain text only."""
+    
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": raw_text}
+            ],
+            temperature=0.1,
+            max_tokens=2000
+        )
+        return response.choices[0].message['content'].strip()
+    except Exception as e:
+        st.error(f"Formatting error: {str(e)}")
+        return raw_text
+
+
 # Add this new function in your utils/grading.py or in the current file
 def convert_rubric_to_table(rubric_text):
     """Convert rubric text to formatted table using OpenAI"""
@@ -118,33 +148,177 @@ def convert_rubric_to_table(rubric_text):
 
 
 
+# def parse_ai_response(response_text):
+#     """
+#     Parse the AI-generated response to extract grade, feedback, and suggestions.
+
+#     Args:
+#         response_text (str): The response text from the AI.
+
+#     Returns:
+#         dict: A dictionary containing 'grade', 'feedback', and 'suggestions'.
+#     """
+#     result = {"grade": None, "feedback": "", "suggestions": ""}
+    
+#     # Extract grade
+#     grade_match = re.search(r'Grade:\s*(\d{1,3})', response_text)
+#     if grade_match:
+#         result["grade"] = int(grade_match.group(1))
+    
+#     # Extract feedback and suggestions
+#     feedback_match = re.search(r'Feedback:\s*(.*?)\s*Suggestions:', response_text, re.DOTALL)
+#     suggestions_match = re.search(r'Suggestions:\s*(.*)', response_text, re.DOTALL)
+    
+#     if feedback_match:
+#         result["feedback"] = feedback_match.group(1).strip()
+#     if suggestions_match:
+#         result["suggestions"] = suggestions_match.group(1).strip()
+    
+#     return result
+
+
+
+# def get_ai_feedback(rubric, submission_text):
+#     """
+#     Generate AI-based feedback for a student's submission based on the provided rubric.
+
+#     Args:
+#         rubric (str): The grading rubric.
+#         submission_text (str): The student's submission text.
+
+#     Returns:
+#         dict: A dictionary containing 'grade', 'feedback', 'suggestions', or 'error'.
+#     """
+#     # system_prompt = (
+#     #     "You are an expert grading assistant. Analyze the student submission "
+#     #     "strictly against the provided rubric. But do not Provide any numerical grade (0-100), just give detailed feedback without numerical grades "
+#     #     "focusing on rubric criteria, and specific suggestions for improvement. Format your response as:\n"
+#     #     "Feedback: [detailed feedback]\n"
+#     #     "Suggestions: [concrete improvement suggestions]"
+#     # )
+    
+#     system_prompt = """You are an expert grading assistant. Analyze the student submission 
+#     strictly against the provided rubric. One can guage the students performance by a numerical grade (0-100) or (0-Total score stipulated on the rubric) derived from summing up each marks or points scored on rubrics, but please display detailed feedback only without including the numerical grade 
+#     focusing on rubric criteria, and specific suggestions for improvement. Format your response as:
+#     Grade: [numerical value that is determined by finding the cumulative sum of all marks (sum/Total score stipulated on the rubric) on each part of the rubric. Apply addition in mathematics]
+#     Feedback: [provide feedback with each point expressing student performance based on the rubrics. include the point scored on each based on the rubrics e.g., 0/20]
+#     Suggestions: [concrete actionable improvement suggestions]
+#     When generating the 'Suggestions', please students adhere to these guidelines from mentor:
+#     As a student mentor, What would you you tell the students to do to get a better score or result based on the rubrics, and also to improve their knowledge and skill
+#     Include the Grade here. Grade: [numerical value (sum/Total score stipulated on the rubric, e.g 10/15 or 15/100 or 45/Total rubric score)]
+#     """
+    
+    
+#     user_prompt = f"RUBRIC CRITERIA:\n{rubric}\n\nSTUDENT SUBMISSION:\n{submission_text}\n\nYOUR EVALUATION:"
+    
+#     try:
+#         response = openai.ChatCompletion.create(
+#             model="gpt-3.5-turbo",
+#             messages=[
+#                 {"role": "system", "content": system_prompt},
+#                 {"role": "user", "content": user_prompt}
+#             ],
+#             temperature=0.0,
+#             max_tokens=1000
+#         )
+#         return parse_ai_response(response.choices[0].message['content'].strip())
+#     except Exception as e:
+#         return {"error": str(e)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def parse_ai_response(response_text):
     """
     Parse the AI-generated response to extract grade, feedback, and suggestions.
-
-    Args:
-        response_text (str): The response text from the AI.
-
-    Returns:
-        dict: A dictionary containing 'grade', 'feedback', and 'suggestions'.
+    Now includes total score at the bottom of suggestions.
     """
     result = {"grade": None, "feedback": "", "suggestions": ""}
     
-    # Extract grade
-    grade_match = re.search(r'Grade:\s*(\d{1,3})', response_text)
+    # Extract grade in X/Y format
+    grade_match = re.search(r'Grade:\s*(\d+/\d+)', response_text)
     if grade_match:
-        result["grade"] = int(grade_match.group(1))
+        result["grade"] = grade_match.group(1)
     
     # Extract feedback and suggestions
     feedback_match = re.search(r'Feedback:\s*(.*?)\s*Suggestions:', response_text, re.DOTALL)
-    suggestions_match = re.search(r'Suggestions:\s*(.*)', response_text, re.DOTALL)
+    suggestions_match = re.search(r'Suggestions:\s*(.*?)(\n\s*Score:)?\s*$', response_text, re.DOTALL)
     
     if feedback_match:
         result["feedback"] = feedback_match.group(1).strip()
     if suggestions_match:
         result["suggestions"] = suggestions_match.group(1).strip()
     
+    # Add formatted score to suggestions
+    if result["grade"]:
+        result["suggestions"] += f"\n\nScore: {result['grade']}"
+    
     return result
+
+def get_ai_feedback(rubric, submission_text):
+    """
+    Generate AI-based feedback with enhanced scoring format
+    """
+    system_prompt = """You are an expert grading assistant. Analyze the student submission 
+    strictly against the provided rubric. Format your response as:
+    
+    Grade: [sum/Total score from rubric (e.g., 12/15 or 85/100 and     This denominator of the grade is the total sum of the rubric scores)]
+    Feedback: [Criterion-based feedback with individual scores]
+    Suggestions: [Actionable improvement suggestions]
+    When generating the 'Suggestions', please students adhere to these guidelines from mentor:
+    As a student mentor, What would you you tell the students to do to get a better score or result based on the rubrics, and also to improve their knowledge and skill
+    
+    Guidelines:
+    1. Calculate total score by summing rubric criterion points
+    2. In Feedback, include per-criterion scores (e.g., "Structure: 4/5")
+    3. Suggestions should focus on specific rubric improvements
+    4. Maintain professional academic tone, yet human friendly response like a student mentor or facilitator
+    """
+    
+    user_prompt = f"""RUBRIC:
+{rubric}
+
+SUBMISSION:
+{submission_text}
+
+EVALUATION:"""
+    
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0,  # Slightly higher temp for varied phrasing
+            max_tokens=1200
+        )
+        return parse_ai_response(response.choices[0].message['content'].strip())
+    except Exception as e:
+        return {"error": str(e)}
+
+
+
+
+
+
+
+
+
+
+
 
 
 def get_ai_feedback_student(rubric, submission_text):
@@ -194,154 +368,41 @@ def get_ai_feedback_student(rubric, submission_text):
 
 
 
-def get_ai_feedback(rubric, submission_text):
-    """
-    Generate AI-based feedback for a student's submission based on the provided rubric.
 
-    Args:
-        rubric (str): The grading rubric.
-        submission_text (str): The student's submission text.
-
-    Returns:
-        dict: A dictionary containing 'grade', 'feedback', 'suggestions', or 'error'.
-    """
-    # system_prompt = (
-    #     "You are an expert grading assistant. Analyze the student submission "
-    #     "strictly against the provided rubric. But do not Provide any numerical grade (0-100), just give detailed feedback without numerical grades "
-    #     "focusing on rubric criteria, and specific suggestions for improvement. Format your response as:\n"
-    #     "Feedback: [detailed feedback]\n"
-    #     "Suggestions: [concrete improvement suggestions]"
-    # )
-    
-    system_prompt = """You are an expert grading assistant. Analyze the student submission 
-    strictly against the provided rubric. One can guage the students performance by a numerical grade (0-100) derived from summing up each marks or points scored on rubrics, but please display detailed feedback only without including the numerical grade 
-    focusing on rubric criteria, and specific suggestions for improvement. Format your response as:
-    Grade: [numerical value that is determined by finding the cumulative sum of all marks (sum/100) on each part of the rubric. Apply addition in mathematics]
-    Feedback: [provide feedback with each point expressing student performance based on the rubrics. include the point scored on each based on the rubrics e.g., 0/20]
-    Suggestions: [concrete actionable improvement suggestions]
-    When generating the 'Suggestions', please students adhere to these guidelines from mentor:
-    As a student mentor, What would you you tell the students to do to get a better score or result based on the rubrics, and also to improve their knowledge and skill
-    """
-    
-    
-    user_prompt = f"RUBRIC CRITERIA:\n{rubric}\n\nSTUDENT SUBMISSION:\n{submission_text}\n\nYOUR EVALUATION:"
-    
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.0,
-            max_tokens=1000
-        )
-        return parse_ai_response(response.choices[0].message['content'].strip())
-    except Exception as e:
-        return {"error": str(e)}
-
-
-
-
-# def get_ai_feedback(rubric, submission_text):
-#     """
-#     Generate AI-based feedback for a student's submission based on the provided rubric.
-
-#     Args:
-#         rubric (str): The grading rubric.
-#         submission_text (str): The student's submission text.
-
-#     Returns:
-#         dict: A dictionary containing 'grade', 'feedback', 'suggestions', or 'error'.
-#     """
-#     # system_prompt = (
-#     #     "You are an expert grading assistant. Analyze the student submission "
-#     #     "strictly against the provided rubric. Provide a numerical grade (0-100), detailed feedback "
-#     #     "focusing on rubric criteria, and specific suggestions for improvement. Format your response as:\n"
-#     #     "Grade: [numerical value]\n"
-#     #     "Feedback: [detailed feedback]\n"
-#     #     "Suggestions: [concrete improvement suggestions]"
-#     # )
-    
-#     system_prompt = """You are an expert grading assistant. Analyze the student submission 
-#     strictly against the provided rubric. Provide a numerical grade (0-100) derived from summing up each marks or points scored on rubrics, detailed feedback 
-#     focusing on rubric criteria, and specific suggestions for improvement. Format your response as:
-    
-#     Feedback: [detailed feedback with each point having its own grade based on the rubrics]
-    
-#     Suggestions: [concrete actionable improvement suggestions]
-#     When generating the 'Suggestions', please adhere to these guidelines:
-#     • Provide formative feedback that emphasizes developmental growth. Clearly state what the student did well and specify areas that need refinement (e.g., 'Consider restructuring this argument for clarity').
-#     • Use guiding questions to encourage student reflection. For example, ask 'What evidence supports this claim?' or 'How might you expand this idea to include counterarguments?'
-#     • Focus on process-oriented feedback by discussing the methodology and the steps taken, and ask questions such as, 'How might you address potential biases in your approach?'
-#     • Offer actionable suggestions that guide revisions without giving away direct solutions. Encourage exploration of alternatives rather than spoonfeeding answers.
-#     • Promote critical thinking by including open-ended prompts. Ask questions like 'What additional evidence would strengthen this section?' or 'Which aspects of your work align best with the assignment criteria and why?'
-#     • Encourage self-assessment and reflective practices with prompts such as 'Based on this feedback, what changes will you make and why?' and 'What aspect of your work are you most confident about?'
-#     • Use Socratic questioning to challenge assumptions and stimulate deeper analysis. For example, ask 'What assumptions are you making here? Are they valid?'
-#     • Position yourself as a generative thinking partner by offering multiple perspectives and iterative improvement strategies. Suggest, 'Here are three perspectives on your argument. Which aligns best with your goals?'
-#     • Incorporate scenario-based feedback where applicable, such as 'Imagine your audience is unfamiliar with this concept. How would you explain it in simpler terms?'
-#     • Scaffold the complexity of your feedback by starting with simpler guidance and gradually introducing higher-order challenges as appropriate.
-#     Provide your evaluation solely based on the provided rubric and submission. 
-    
-#     Grade: [numerical value that is determined by finding the cumulative sum of all marks (sum/100) on each part of the rubric. Apply addition in mathematics]"""
-    
-    
-#     user_prompt = f"RUBRIC CRITERIA:\n{rubric}\n\nSTUDENT SUBMISSION:\n{submission_text}\n\nYOUR EVALUATION:"
-    
-#     try:
-#         response = openai.ChatCompletion.create(
-#             model="gpt-3.5-turbo",
-#             messages=[
-#                 {"role": "system", "content": system_prompt},
-#                 {"role": "user", "content": user_prompt}
-#             ],
-#             temperature=0.0,
-#             max_tokens=1000
-#         )
-#         return parse_ai_response(response.choices[0].message['content'].strip())
-#     except Exception as e:
-#         return {"error": str(e)}
-
-
-# Ensure your save_grading_record function returns True/False
-# def save_grading_record(record):
-#     try:
-#         conn = get_db_connection()
-#         cursor = conn.cursor()
-#         cursor.execute("""
-#             INSERT INTO grading_records 
-#             (course_id, assignment, student, file, grade, feedback, suggestions, instructor_comment, timestamp)
-#             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-#         """, (
-#             record['course_id'],
-#             record['assignment'],
-#             record['student'],
-#             record['file'],
-#             record['grade'],
-#             record['feedback'],
-#             record['suggestions'],
-#             record.get("instructor_comment", ""),
-#             record['timestamp']
-#         ))
-#         conn.commit()
-#         return True
-#     except Exception as e:
-#         st.error(f"Database error: {str(e)}")
-#         return False
-#     finally:
-#         if conn:
-#             conn.close()
 
 
 
 # Modify the save_grading_record function in your utils/grading.py
 def save_grading_record(record):
-    """Save grading record to database with duplicate check"""
+    """Save grading record to database with duplicate check and grade conversion"""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Check for existing duplicate record (excluding timestamp)
+        # Convert grade from fraction to percentage if needed
+        if isinstance(record['grade'], str) and '/' in record['grade']:
+            parts = record['grade'].split('/')
+            if len(parts) == 2:
+                try:
+                    numerator = int(parts[0])
+                    denominator = int(parts[1])
+                    
+                    if denominator == 100:
+                        # Directly use numerator if denominator is 100
+                        record['grade'] = numerator
+                    else:
+                        # Calculate percentage for other denominators
+                        record['grade'] = round((numerator / denominator) * 100)
+                except (ValueError, ZeroDivisionError):
+                    raise ValueError("Invalid grade format. Use 'X/Y' or integer value")
+        else:
+            # Handle integer grades directly
+            try:
+                record['grade'] = int(record['grade'])
+            except:
+                raise ValueError("Grade must be in 'X/Y' format or integer value")
+
+        # Rest of the duplicate check and insert logic remains the same
         cursor.execute("""
             SELECT EXISTS(
                 SELECT 1 FROM grading_records
@@ -370,7 +431,6 @@ def save_grading_record(record):
         if exists:
             return 'duplicate'
         
-        # Insert new record if no duplicate found
         cursor.execute("""
             INSERT INTO grading_records 
             (course_id, assignment, student, file, grade, feedback, 
@@ -396,6 +456,78 @@ def save_grading_record(record):
     finally:
         cursor.close()
         conn.close()
+
+
+# def save_grading_record(record):
+#     """Save grading record to database with duplicate check"""
+#     try:
+#         conn = get_db_connection()
+#         cursor = conn.cursor()
+        
+#         # Convert grade from fraction (e.g., "48/100") to just the numerator (48)
+#         if isinstance(record['grade'], str) and '/' in record['grade']:
+#             numerator = record['grade'].split('/')[0]  # Extract numerator
+#             record['grade'] = int(numerator)  # Convert to integer
+        
+#         # Check for existing duplicate record (excluding timestamp)
+#         cursor.execute("""
+#             SELECT EXISTS(
+#                 SELECT 1 FROM grading_records
+#                 WHERE course_id = %s
+#                 AND assignment = %s
+#                 AND student = %s
+#                 AND file = %s
+#                 AND grade = %s
+#                 AND feedback = %s
+#                 AND suggestions = %s
+#                 AND instructor_comment = %s
+#             )
+#         """, (
+#             record['course_id'],
+#             record['assignment'],
+#             record['student'],
+#             record['file'],
+#             record['grade'],
+#             record['feedback'],
+#             record['suggestions'],
+#             record['instructor_comment']
+#         ))
+        
+#         exists = cursor.fetchone()[0]
+        
+#         if exists:
+#             return 'duplicate'
+        
+#         # Insert new record if no duplicate found
+#         cursor.execute("""
+#             INSERT INTO grading_records 
+#             (course_id, assignment, student, file, grade, feedback, 
+#              suggestions, instructor_comment, timestamp)
+#             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+#         """, (
+#             record['course_id'],
+#             record['assignment'],
+#             record['student'],
+#             record['file'],
+#             record['grade'],
+#             record['feedback'],
+#             record['suggestions'],
+#             record['instructor_comment'],
+#             record['timestamp']
+#         ))
+#         conn.commit()
+#         return 'success'
+#     except Exception as e:
+#         conn.rollback()
+#         print(f"Database error: {str(e)}")
+#         return 'error'
+#     finally:
+#         cursor.close()
+#         conn.close()
+
+
+
+
 
 
 def get_all_grading_data():
@@ -4190,119 +4322,551 @@ Submitted more than two weeks after deadline expired
 Total Points: 15
 """
              
-         )
+         ),
+         
+         
+         
+         
+         
+         
+        "Week 1 Assignment: Software Requirements and Specifications": ( 
+         
+         """
+Criteria    Ratings    Pts
+
+This criterion is linked to a Learning Outcome
+Time Management:  
+threshold: 3.0 pts  
+5 pts  
+Assignment submitted before deadline expired  
+4 pts  
+Submitted max. two days after deadline expired  
+3 pts  
+Submitted three to seven days after deadline expired  
+2 pts  
+Submitted eight to fifteen days after deadline expired  
+1 pts  
+Submitted more than two weeks after deadline expired  
+5 pts  
+
+
+This criterion is linked to a Learning Outcome
+Core Requirements:  
+10 pts  
+Clearly defined 5 core requirements  
+8 pts  
+Satisfactory requirements with some gaps  
+6 pts  
+Basic requirements with limited clarity  
+4 pts  
+Limited requirements  
+2 pts  
+Inadequate requirements  
+10 pts  
+
+This criterion is linked to a Learning Outcome
+Project Overview:  
+5 pts  
+Thorough and comprehensive project overview provided  
+4 pts  
+Sufficient project overview, but some key details may be missing  
+3 pts  
+Basic project overview, lacking in-depth information  
+2 pts  
+Limited project overview with significant gaps in understanding  
+1 pts  
+Inadequate project overview  
+5 pts  
+
+This criterion is linked to a Learning Outcome
+Specifications:  
+10 pts  
+Well-defined 5 specifications  
+8 pts  
+Satisfactory specifications with some gaps  
+6 pts  
+Basic specifications with limited details  
+4 pts  
+Limited specifications  
+2 pts  
+Inadequate specifications  
+10 pts  
+
+
+
+Total Points: 30
+"""
+        ),
+         
+         
+         
+         
+         
+         
+        "Week 2 Assignment: Applying Agile Concepts to Project Management": ( 
+         """
+Criteria	Ratings	Pts
+
+This criterion is linked to a Learning Outcome: 
+Time Management:
+threshold: 3.0 pts
+5 pts - Assignment submitted before deadline expired  
+4 pts - Submitted max. two days after deadline expired  
+3 pts - Submitted three to seven days after deadline expired  
+2 pts - Submitted eight to fifteen days after deadline expired  
+1 pts - Submitted more than two weeks after deadline expired  
+Total: 5 pts
+
+This criterion is linked to a Learning Outcome: 
+Apply Agile concepts to project management:
+10 pts - Excellent application of Agile principles with depth and clarity  
+8 pts - Good application of Agile principles, but some areas could be improved  
+6 pts - Adequate application of Agile principles, but lacking depth or clarity  
+4 pts - Limited application of Agile principles with significant gaps  
+2 pts - Inadequate application of Agile principles  
+Total: 10 pts
+
+This criterion is linked to a Learning Outcome: 
+Project Overview:  
+5 pts - Thorough and comprehensive project overview provided  
+4 pts - Sufficient project overview, but some key details may be missing  
+3 pts - Basic project overview, lacking in-depth information  
+2 pts - Limited project overview with significant gaps in understanding  
+1 pts - Inadequate project overview  
+Total: 5 pts
+
+This criterion is linked to a Learning Outcome: 
+Applying Agile Principles:  
+5 pts - Clear and well-developed explanation of applying Agile principles  
+4 pts - Satisfactory explanation of applying Agile principles, but with some gaps or lack of clarity  
+3 pts - Limited explanation of applying Agile principles with notable deficiencies  
+2 pts - Incomplete or unclear explanation of applying Agile principles  
+1 pts - Minimal or no attempt to apply Agile principles  
+Total: 5 pts
+
+
+Total Points: 25
+"""
+       ),
+         
+         
+  "Week 3 Assignment: Design a Digital Product with User-Centered Design": (
+
+
+    """
+Criteria	Ratings	Pts
+
+This criterion is linked to a Learning Outcome: 
+Time Management  
+threshold: 3.0 pts  
+5 pts - Assignment submitted before deadline expired  
+4 pts - Submitted max. two days after deadline expired  
+3 pts - Submitted three to seven days after deadline expired  
+2 pts - Submitted eight to fifteen days after deadline expired  
+1 pts - Submitted more than two weeks after deadline expired  
+Total: 5 pts  
+
+This criterion is linked to a Learning Outcome: 
+User Persona:  
+5 pts - Clear and well-developed user persona with detailed information  
+4 pts - Satisfactory user persona, but some aspects could be further elaborated  
+3 pts - Basic user persona with limited depth or clarity  
+2 pts - Limited user persona with notable deficiencies in understanding  
+1 pts - Inadequate user persona provided  
+Total: 5 pts  
+
+This criterion is linked to a Learning Outcome: 
+User Story Mapping:  
+10 pts - Thorough and comprehensive user story mapping with clear prioritization  
+8 pts - Satisfactory user story mapping, but some aspects could be improved  
+6 pts - Basic user story mapping with limited depth or clarity  
+4 pts - Limited user story mapping with significant gaps  
+2 pts - Inadequate user story mapping provided  
+Total: 10 pts  
+
+
+Total Points: 20
+"""
+),   
+ 
+         
+         
+         
+         
+        "Week 4 Assignment: Scrum Methodology Key Takeaways": (  
+             
+         """
+Criteria    Ratings    Pts
+
+This criterion is linked to a Learning Outcome: 
+Fictional Project Overview:
+5 pts  - Clear and well-structured overview
+4 pts  - Satisfactory overview
+3 pts  - Basic overview
+2 pts  - Limited overview
+1 pts  - Inadequate overview provided
+0 pts  - No overview provided
+
+5 pts  
+
+This criterion is linked to a Learning Outcome: 
+Time Management:
+threshold: 3.0 pts
+5 pts  - Assignment submitted before deadline expired
+4 pts  - Submitted max. two days after deadline expired
+3 pts  - Submitted three to seven days after deadline expired
+2 pts  - Submitted eight to fifteen days after deadline expired
+1 pts  - Submitted more than two weeks after deadline expired
+
+5 pts  
+
+This criterion is linked to a Learning Outcome: 
+Key Takeaways:
+10 pts  - Identification and highlighting of key takeaways
+8 pts   - Satisfactory identification and highlighting
+6 pts   - Basic identification and highlighting
+4 pts   - Limited identification and highlighting
+2 pts   - Inadequate identification and highlighting provided
+0 pts   - No identification and highlighting provided
+
+10 pts  
+
+
+Total Points: 20
+"""
+      ),
+         
+         
+         
+         
+        
+        
+        
+        "Week 5 Assignment: Lean Fundamentals": ( 
+        """
+Criteria	Ratings	Pts
+
+This criterion is linked to a Learning Outcome: 
+Time Management:  
+threshold: 3.0 pts  
+5 pts - Assignment submitted before deadline expired  
+4 pts - Submitted max. two days after deadline expired  
+3 pts - Submitted three to seven days after deadline expired  
+2 pts - Submitted eight to fifteen days after deadline expired  
+1 pt - Submitted more than two weeks after deadline expired  
+Total: 5 pts  
+
+This criterion is linked to a Learning Outcome: 
+Fictional Project Overview:  
+5 pts - Clear and concise overview  
+4 pts - Satisfactory overview  
+3 pts - Basic overview  
+2 pts - Limited overview  
+1 pt - Inadequate overview provided  
+0 pts - No overview provided  
+Total: 5 pts  
+
+This criterion is linked to a Learning Outcome: 
+Waste Identification:  
+5 pts - Identification of at least 3 examples of waste  
+4 pts - Satisfactory identification of waste  
+3 pts - Basic identification of waste  
+2 pts - Limited identification of waste  
+1 pt - Inadequate identification of waste provided  
+0 pts - No identification of waste provided  
+Total: 5 pts  
+
+This criterion is linked to a Learning Outcome: 
+Waste Reduction Strategies:  
+10 pts - Proposed strategies for reducing waste  
+8 pts - Satisfactory strategies proposed  
+6 pts - Basic strategies proposed  
+4 pts - Limited strategies proposed  
+2 pts - Inadequate strategies proposed  
+0 pts - No strategies proposed  
+Total: 10 pts  
+
+
+
+Total Points: 25  
+"""
+ 
+      ),     
+         
+         
+         
+         
+         
+         
+        "Week 6 Assignment: Lean Startup": (  
+         """
+Criteria    Ratings    Pts
+
+This criterion is linked to a Learning Outcome: 
+Fictional Startup Overview:
+5 pts  - Clear and concise project overview  
+4 pts  - Satisfactory project overview  
+3 pts  - Basic project overview  
+2 pts  - Limited project overview  
+1 pts  - Inadequate project overview provided  
+0 pts  - No project overview provided  
+5 pts  
+
+This criterion is linked to a Learning Outcome: 
+Time Management:  
+threshold: 3.0 pts  
+5 pts  - Assignment submitted before deadline expired  
+4 pts  - Submitted max. two days after deadline expired  
+3 pts  - Submitted three to seven days after deadline expired  
+2 pts  - Submitted eight to fifteen days after deadline expired  
+1 pts  - Submitted more than two weeks after deadline expired  
+5 pts  
+
+This criterion is linked to a Learning Outcome: 
+Hypothesis:  
+5 pts  - Clear and testable hypothesis  
+4 pts  - Satisfactory hypothesis  
+3 pts  - Basic hypothesis  
+2 pts  - Limited hypothesis  
+1 pts  - Inadequate hypothesis provided  
+0 pts  - No hypothesis provided  
+5 pts  
+
+This criterion is linked to a Learning Outcome: 
+Experiment:  
+5 pts  - Well-described experiment  
+4 pts  - Satisfactory experiment  
+3 pts  - Basic experiment  
+2 pts  - Limited experiment  
+1 pts  - Inadequate experiment provided  
+0 pts  - No experiment provided  
+5 pts  
+
+This criterion is linked to a Learning Outcome: 
+Pivot:  
+5 pts  - Clear and feasible pivot strategy  
+4 pts  - Satisfactory pivot strategy  
+3 pts  - Basic pivot strategy  
+2 pts  - Limited pivot strategy  
+1 pts  - Inadequate pivot strategy provided  
+0 pts  - No pivot strategy provided  
+5 pts  
+
+
+
+Total Points: 25
+"""
+
+        ), 
+         
+         
+         
+         
+         "Week 7 Assignment: Test and Deploy Quality Software": (  
+         """
+Criteria    Ratings    Pts
+
+This criterion is linked to a Learning Outcome: 
+Automated Static Analysis:  
+10 pts - Perfectly functional analysis on push  
+8 pts - Satisfactory analysis with minor issues  
+6 pts - Basic analysis with noticeable issues  
+4 pts - Limited analysis with significant issues  
+2 pts - Inadequate analysis  
+0 pts - No analysis performed  
+10 pts  
+
+This criterion is linked to a Learning Outcome: 
+Time Management:  
+Threshold: 3.0 pts  
+5 pts - Assignment submitted before deadline expired  
+4 pts - Submitted max. two days after deadline expired  
+3 pts - Submitted three to seven days after deadline expired  
+2 pts - Submitted eight to fifteen days after deadline expired  
+1 pts - Submitted more than two weeks after deadline expired  
+
+This criterion is linked to a Learning Outcome: 
+Automated Testing:  
+10 pts - Perfectly functional tests on push  
+8 pts - Satisfactory tests with minor issues  
+6 pts - Basic tests with noticeable issues  
+4 pts - Limited tests with significant issues  
+2 pts - Inadequate tests  
+0 pts - No testing performed  
+10 pts  
+
+
+
+Total Points: 20
+"""
+
+         
+       ),  
+         
+         
+         
+         
+         
+         
+         "Week 8 Assignment: Design Thinking": (  
+         
+         """
+Criteria	Ratings	Pts
+This criterion is linked to a Learning Outcome
+Problem Overview:
+5 pts
+- Clear and concise problem explanation
+4 pts
+- Satisfactory problem explanation
+3 pts
+- Basic problem explanation
+2 pts
+- Limited problem explanation
+1 pts
+- Inadequate problem explanation provided
+0 pts
+- No problem explanation provided
+5 pts
+
+This criterion is linked to a Learning Outcome
+Ask "Why?" Five Times:
+10 pts
+- Comprehensive and specific analysis
+8 pts
+- Satisfactory analysis
+6 pts
+- Basic analysis
+4 pts
+- Limited analysis
+2 pts
+- Inadequate analysis provided
+0 pts
+- No analysis provided
+10 pts
+
+This criterion is linked to a Learning Outcome
+Document the Analysis:
+5 pts
+- Thorough documentation with evidence
+4 pts
+- Satisfactory documentation
+3 pts
+- Basic documentation
+2 pts
+- Limited documentation
+1 pts
+- Inadequate documentation provided
+0 pts
+- No documentation provided
+5 pts
+
+This criterion is linked to a Learning Outcome
+Identify the Root Causes:
+5 pts
+- Comprehensive list of root causes
+4 pts
+- Satisfactory list of root causes
+3 pts
+- Basic list of root causes
+2 pts
+- Limited list of root causes
+1 pts
+- Inadequate list of root causes provided
+0 pts
+- No list of root causes provided
+5 pts
+
+This criterion is linked to a Learning Outcome
+Proposed Solutions:
+5 pts
+- Well-defined and effective solutions
+4 pts
+- Satisfactory solutions proposed
+3 pts
+- Basic solutions proposed
+2 pts
+- Limited solutions proposed
+1 pts
+- Inadequate solutions proposed
+0 pts
+- No solutions proposed
+5 pts
+
+This criterion is linked to a Learning Outcome
+Time Management:
+threshold: 3.0 pts
+5 pts
+Assignment submitted before deadline expired
+4 pts
+Submitted max. two days after deadline expired
+3 pts
+Submitted three to seven days after deadline expired
+2 pts
+Submitted eight to fifteen days after deadline expired
+1 pts
+Submitted more than two weeks after deadline expired
+--
+
+
+
+Total Points: 30
+"""
+
+      )   
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
     
     }
     return rubrics.get(assignment_name, 
                        
-                       """
+   """
 Criteria	Ratings	Pts
 
-This criterion is linked to a Learning Outcome
-Time Management:
-This is based on the assignment submission date.
-10 pts
-Before Deadline
-Assignment Submitted before the deadline.
-8 pts
-Around the Deadline
-Assignment Submitted max 2 days after the deadline.
-6 pts
-About a week late
-Assignment Submitted 3-7 days after the deadline.
-4 pts
-More than 1 week late
-Assignment Submitted 8-14 days after the deadline.
-2 pts
-Later than 2 weeks
-Assignment Submitted more than 2 weeks after the deadline.
-10 pts
+This criterion is linked to a Learning Outcome: 
+Time Management  
+threshold: 3.0 pts  
+5 pts - Assignment submitted before deadline expired  
+4 pts - Submitted max. two days after deadline expired  
+3 pts - Submitted three to seven days after deadline expired  
+2 pts - Submitted eight to fifteen days after deadline expired  
+1 pts - Submitted more than two weeks after deadline expired  
+Total: 5 pts  
 
-This criterion is linked to a Learning Outcome
-Criteria 1: Understanding of Design Thinking Process:
-Learning Outcome 
-3.2.a. Familiarity of Design Thinking Framework:
-20 pts
-Excellent
-Demonstrates a comprehensive understanding of the Design Thinking process, including its origins, key principles, and contemporary applications. Provides insightful examples of its use in innovation work, clearly articulating the value it brings.
-16 pts
-Very Good
-Shows a solid grasp of the Design Thinking process and its applications. Examples are relevant but may lack depth or insight into the broader context.
-12 pts
-Satisfactory
-Provides a basic understanding of the Design Thinking process. Examples are present but may be superficial or lack clear connection to the principles discussed.
-8 pts
-Fair
-Demonstrates limited understanding of the Design Thinking process. Examples are vague or unrelated, showing minimal connection to the principles.
-4 pts
-Poor
-Shows little to no understanding of the Design Thinking process. Lacks examples or any clear articulation of its principles and applications.
-20 pts
+This criterion is linked to a Learning Outcome: 
+User Persona:  
+5 pts - Clear and well-developed user persona with detailed information  
+4 pts - Satisfactory user persona, but some aspects could be further elaborated  
+3 pts - Basic user persona with limited depth or clarity  
+2 pts - Limited user persona with notable deficiencies in understanding  
+1 pts - Inadequate user persona provided  
+Total: 5 pts  
 
-This criterion is linked to a Learning Outcome
-Criteria 2: Distinction between Design Thinking and Engineering Thinking:
-Learning Outcome 
-3.3.a. Understanding Organisational Conditions for Innovation:
-25 pts
-Excellent
-Clearly articulates the differences between Design Thinking and Engineering Thinking with a well-developed example from their project. Demonstrates deep understanding of how these approaches might clash and provides thoughtful reflections on managing this tension.
-20 pts
-Satisfactory
-Identifies basic differences between Design Thinking and Engineering Thinking. Example from the project is provided but lacks detail or reflection.
-15 pts
-Satisfactory
-Identifies basic differences between Design Thinking and Engineering Thinking. Example from the project is provided but lacks detail or reflection.
-10 pts
-Fair
-Provides a limited explanation of the differences between Design Thinking and Engineering Thinking. Example is vague or not well connected to the project.
-5 pts
-Poor
-Shows minimal understanding of the differences between Design Thinking and Engineering Thinking. Lacks a coherent example or reflection.
-25 pts
+This criterion is linked to a Learning Outcome: 
+User Story Mapping:  
+10 pts - Thorough and comprehensive user story mapping with clear prioritization  
+8 pts - Satisfactory user story mapping, but some aspects could be improved  
+6 pts - Basic user story mapping with limited depth or clarity  
+4 pts - Limited user story mapping with significant gaps  
+2 pts - Inadequate user story mapping provided  
+Total: 10 pts  
 
-This criterion is linked to a Learning Outcome
-Criteria 3: Application of Design Thinking in the Chosen Project:
-Learning Outcome 
-5.2.b. Strategic Guidance:
-25 pts
-Excellent
-Provides a detailed and thoughtful plan for applying Design Thinking in the chosen project. Clearly articulates the rationale behind project choice and how Design Thinking will be integrated.
-20 pts
-Satisfactory
-Outlines a solid plan for using Design Thinking in the project. Rationale for project choice is clear, but details on application may lack some depth.
-15 pts
-Satisfactory
-Describes a basic plan for using Design Thinking in the project. Rationale is present but not thoroughly explained.
-10 pts
-Fair
-Offers a limited plan for applying Design Thinking in the project. Rationale for project choice is unclear or poorly articulated.
-5 pts
-Poor
-Shows minimal thought in planning for the use of Design Thinking in the project. Lacks clear rationale or integration plan.
-25 pts
 
-This criterion is linked to a Learning Outcome
-Criteria 4: Reflection on Personal Excitement and Challenges:
-Learning Outcome 
-5.2.c. Emerging as a Trusted Leader:
-20 pts
-Excellent
-Provides a deeply reflective and insightful account of personal excitement and anticipated challenges. Demonstrates a strong awareness of personal growth opportunities and potential obstacles in the Design Thinking process.
-16 pts
-Good
-Reflects well on personal excitement and challenges. Shows good awareness of growth opportunities and obstacles, though reflections may lack some depth.
-12 pts
-Satisfactory
-Offers basic reflections on personal excitement and challenges. Awareness of growth opportunities and obstacles is present but not deeply explored.
-8 pts
-Fair
-Provides limited reflection on personal excitement and challenges. Awareness of personal growth opportunities and obstacles is minimal.
-4 pts
-Poor
-Shows minimal reflection on personal excitement and challenges. Lacks awareness of personal growth opportunities or obstacles.
-20 pts
-Total Points: 100
-""" )
+Total Points: 20
+"""
+)
+
+
+
 
 
 

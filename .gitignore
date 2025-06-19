@@ -1,6 +1,7 @@
 .qodo
 *.pyc
 venv/
+myenv/
 
 # Ignore large media files
 assets/*.mp4
@@ -54,7 +55,6 @@ azurecredentials.json
 *.csv
 *.json
 grading_results/
-delete_all_data.py
 check_versions.py
 
 # Session files

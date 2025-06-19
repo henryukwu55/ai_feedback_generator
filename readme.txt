@@ -149,3 +149,107 @@ CREATE TABLE users (
     is_approved BOOLEAN DEFAULT FALSE,
     student_id VARCHAR  -- Ensure this column exists
 );
+
+
+
+
+
+
+
+
+coding platform database command creation:
+-- Enhanced Users Table
+CREATE TABLE code_p_users (
+    user_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    username VARCHAR(100),
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMPTZ,
+    registration_source VARCHAR(50),
+    is_verified BOOLEAN DEFAULT FALSE,
+    CONSTRAINT valid_email CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
+);
+
+-- Enhanced Linux Progress Tracking
+CREATE TABLE code_p_linux_progress (
+    progress_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID REFERENCES code_p_users(user_id) ON DELETE CASCADE,
+    current_stage INTEGER NOT NULL DEFAULT 0,
+    total_attempts INTEGER DEFAULT 0,
+    total_time_spent INTERVAL,
+    linux_data JSONB,
+    stage_started_at TIMESTAMPTZ,
+    last_updated TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    completed_at TIMESTAMPTZ
+);
+
+-- Enhanced Programming Progress Tracking
+CREATE TABLE code_p_programming_progress (
+    progress_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID REFERENCES code_p_users(user_id) ON DELETE CASCADE,
+    current_stage INTEGER NOT NULL DEFAULT 0,
+    total_attempts INTEGER DEFAULT 0,
+    total_time_spent INTERVAL,
+    programming_data JSONB,
+    stage_started_at TIMESTAMPTZ,
+    last_updated TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    completed_at TIMESTAMPTZ
+);
+
+-- Comprehensive Submissions Table
+CREATE TABLE code_p_submissions (
+    submission_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID REFERENCES code_p_users(user_id) ON DELETE CASCADE,
+    submission_type VARCHAR(50) NOT NULL,
+    task_project_id UUID,  -- References specific tasks/projects
+    difficulty_level VARCHAR(50),
+    topic VARCHAR(100),
+    submission_data JSONB NOT NULL,
+    evaluation_results JSONB,
+    status VARCHAR(20) DEFAULT 'pending',
+    submission_metadata JSONB,
+    feedback_viewed BOOLEAN DEFAULT FALSE,
+    revised_after_approval BOOLEAN DEFAULT FALSE,
+    approved_at TIMESTAMPTZ,
+    submitted_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    completion_time INTERVAL,
+    CONSTRAINT valid_status CHECK (status IN ('pending', 'approved', 'rejected'))
+);
+
+-- Indexes for Analytics
+CREATE INDEX idx_submissions_type ON code_p_submissions(submission_type);
+CREATE INDEX idx_submissions_difficulty ON code_p_submissions(difficulty_level);
+CREATE INDEX idx_submissions_topic ON code_p_submissions(topic);
+CREATE INDEX idx_submissions_timestamp ON code_p_submissions(submitted_at);
+
+
+
+
+-- Task/Project Catalog (for trend analysis)
+CREATE TABLE code_p_tasks (
+    task_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    task_type VARCHAR(50) NOT NULL,
+    difficulty VARCHAR(50) NOT NULL,
+    topic VARCHAR(100) NOT NULL,
+    average_completion_time INTERVAL,
+    success_rate DECIMAL(5,2),
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Skill Taxonomy (for competency mapping)
+CREATE TABLE code_p_skills (
+    skill_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    skill_name VARCHAR(100) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    difficulty_level VARCHAR(50) NOT NULL,
+    description TEXT
+);
+
+-- User-Skill Relationships
+CREATE TABLE code_p_user_skills (
+    user_id UUID REFERENCES code_p_users(user_id),
+    skill_id UUID REFERENCES code_p_skills(skill_id),
+    proficiency_score DECIMAL(5,2),
+    last_assessed_at TIMESTAMPTZ,
+    PRIMARY KEY (user_id, skill_id)
+);
