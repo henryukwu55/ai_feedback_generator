@@ -55,16 +55,20 @@ def register_user(email, password, role):
     finally:
         conn.close()
 
+
+
+
+
 # Function to validate user login
 def validate_user(email, password):
     if not is_valid_email(email):
         st.error("Invalid email format. Please use an email ending with @amsterdam.tech.")
-        return None
+        return None, None  # ✅ Return a tuple
     
     conn = get_db_connection()
     if not conn:
         st.error("Database connection error.")
-        return None
+        return None, None  # ✅ Return a tuple
     
     hashed_password = hash_password(password)
     try:
@@ -72,15 +76,43 @@ def validate_user(email, password):
             cursor.execute("SELECT role, is_approved, student_id FROM users WHERE email = %s AND password = %s", (email, hashed_password))
             result = cursor.fetchone()
             if result and result[1]:  # Check if user is approved
-                return result[0], result[2]  # Return role and student_id
+                return result[0], result[2]  # ✅ (role, student_id)
             else:
                 st.error("Invalid email or password.")
-                return None, None
+                return None, None  # ✅ Return a tuple
     except Exception as e:
         st.error(f"Error during login: {e}")
-        return None, None
+        return None, None  # ✅ Return a tuple
     finally:
         conn.close()
+
+
+# # Function to validate user login
+# def validate_user(email, password):
+#     if not is_valid_email(email):
+#         st.error("Invalid email format. Please use an email ending with @amsterdam.tech.")
+#         return None
+    
+#     conn = get_db_connection()
+#     if not conn:
+#         st.error("Database connection error.")
+#         return None
+    
+#     hashed_password = hash_password(password)
+#     try:
+#         with conn.cursor() as cursor:
+#             cursor.execute("SELECT role, is_approved, student_id FROM users WHERE email = %s AND password = %s", (email, hashed_password))
+#             result = cursor.fetchone()
+#             if result and result[1]:  # Check if user is approved
+#                 return result[0], result[2]  # Return role and student_id
+#             else:
+#                 st.error("Invalid email or password.")
+#                 return None, None
+#     except Exception as e:
+#         st.error(f"Error during login: {e}")
+#         return None, None
+#     finally:
+#         conn.close()
 
 # Function to get all users for admin management
 def get_all_users():
