@@ -253,3 +253,30 @@ CREATE TABLE code_p_user_skills (
     last_assessed_at TIMESTAMPTZ,
     PRIMARY KEY (user_id, skill_id)
 );
+
+
+
+PRVIOUS REQUIREMENTS.TXT:
+streamlit==1.43.0
+python-dotenv==1.0.0
+openai==0.28.0
+requests==2.31.0
+python-docx==0.8.11
+pandas==2.2.0
+azure-storage-blob==12.23.1
+xlsxwriter==3.2.2
+statsmodels==0.14.4
+plotly==6.0.0
+matplotlib==3.8.2
+wordcloud==1.9.4
+seaborn==0.12.2
+numpy==1.26.4
+psycopg2-binary==2.9.9
+xlwt==1.3.0
+slack-sdk==3.27.1
+canvasapi==3.2.0
+python-pptx==0.6.23
+setuptools==69.1.0
+openpyxl==3.1.5
+streamlit-lottie==0.0.5
+PyPDF2==3.0.1

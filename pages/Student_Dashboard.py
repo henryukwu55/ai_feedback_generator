@@ -14,6 +14,19 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+import streamlit as st
+
+# Remove ONLY the "About" option from the menu
+hide_about_option = """
+<style>
+/* Hide the About menu item */
+li[data-testid="main-menu-about"] {
+    display: none !important;
+}
+</style>
+"""
+st.markdown(hide_about_option, unsafe_allow_html=True)
+
 
 
 def track_activity():
