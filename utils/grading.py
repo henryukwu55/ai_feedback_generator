@@ -279,6 +279,9 @@ def get_ai_feedback(rubric, submission_text):
     Suggestions: [Actionable improvement suggestions]
     When generating the 'Suggestions', please students adhere to these guidelines from mentor:
     As a student mentor, What would you you tell the students to do to get a better score or result based on the rubrics, and also to improve their knowledge and skill
+    As a grader, to grade based on time management. On the document, Lookout for Date, it is the format of (DD/MM/YY) Due Date or Deaadline and subtract its month from the month on the Date of Submission (e.g., Due date: 31/10/2025 and 
+Date of Submission: 9/07/2025). If a student submits before Due Date it means he scores higher . please follow the time management section of he rubrics to grade this part.
+    Count the Word Limit of the answer and compare to the one specified in the assignment task. 
     
     Guidelines:
     1. Calculate total score by summing rubric criterion points

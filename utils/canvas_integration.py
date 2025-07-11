@@ -98,7 +98,7 @@ def download_course_submissions(canvas_domain, canvas_token, course_id):
                 for filename, content in files:
                     ext = filename.split('.')[-1].lower()
                     # Updated file extension check
-                    if ext not in ['docx', 'txt', 'pdf', 'md', 'pages']:
+                    if ext not in ['docx', 'doc', 'txt', 'pdf', 'md', 'pages']:
                         continue
                     blob_name = f"{course_id}-{assignment_id}-{assignment_name}-{student_id}.{ext}"
                     file_url = upload_to_azure(content, blob_name)
@@ -123,6 +123,8 @@ def read_docx(file_content):
     except Exception as e:
         st.error(f"DOCX read error: {str(e)}")
         return ""
+    
+    
 
 def read_pdf(content):
     """Extract text from PDF files"""
@@ -198,7 +200,8 @@ records = {
     "viktor.rodau@elu.nl": {"name": "Viktor Rodau", "student_id": "181"}, "moisieiev.mykyta@elu.nl": {"name": "Moisieiev Mykyta", "student_id": "139"},
     "george.vilnoiu@elu.nl": {"name": "George Vilnoiu", "student_id": "153"}, "test_student@amsterdam.tech": {"name": "Test Student", "student_id": "464"},
     "ify@amsterdam.tech": {"name": "Ify Genevieve", "student_id": "464"}, "naz.aydin@amsterdam.tech": {"name": "Naz Aydin", "student_id": "1214"},
-    "riaz.ullah@amsterdam.tech": {"name": "Riaz Ullah", "student_id": "1208"}, "ricky.benschop@amsterdam.tech": {"name": "Ricky Benschop", "student_id": "1209"}
+    "riaz.ullah@amsterdam.tech": {"name": "Riaz Ullah", "student_id": "1208"}, "ricky.benschop@amsterdam.tech": {"name": "Ricky Benschop", "student_id": "1209"},
+    "isadora@amsterdam.tech": {"name": "Isadora Costa", "student_id": "2655"}
     # ... (rest of your records)
 }
 
