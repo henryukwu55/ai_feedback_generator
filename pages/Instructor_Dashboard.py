@@ -155,7 +155,8 @@ records_staff = {
     "yana.kondratyuk@elu.nl": {"name": "Yana Kondratyuk", "student_id": "165"},
     "jozsef.dudas@elu.nl": {"name": "Dudás József", "student_id": "403"},
     "viktor.rodau@elu.nl": {"name": "Viktor Rodau", "student_id": "181"},
-    "isadora@amsterdam.tech": {"name": "Isadora Costa", "student_id": "2655"}
+    "isadora@amsterdam.tech": {"name": "Isadora Costa", "student_id": "2655"},
+    "henry@amsterdam.tech": {"name": "Henry Ukwu", "student_id": "1561"}
 }
 
 def get_user_details(email):

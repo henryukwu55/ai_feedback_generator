@@ -201,7 +201,7 @@ records = {
     "george.vilnoiu@elu.nl": {"name": "George Vilnoiu", "student_id": "153"}, "test_student@amsterdam.tech": {"name": "Test Student", "student_id": "464"},
     "ify@amsterdam.tech": {"name": "Ify Genevieve", "student_id": "464"}, "naz.aydin@amsterdam.tech": {"name": "Naz Aydin", "student_id": "1214"},
     "riaz.ullah@amsterdam.tech": {"name": "Riaz Ullah", "student_id": "1208"}, "ricky.benschop@amsterdam.tech": {"name": "Ricky Benschop", "student_id": "1209"},
-    "isadora@amsterdam.tech": {"name": "Isadora Costa", "student_id": "2655"}
+    "isadora@amsterdam.tech": {"name": "Isadora Costa", "student_id": "2655"}, "henry@amsterdam.tech": {"name": "Henry Ukwu", "student_id": "1561"}
     # ... (rest of your records)
 }
 

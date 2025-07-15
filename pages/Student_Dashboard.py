@@ -78,7 +78,8 @@ records = {
     "george.vilnoiu@elu.nl": {"name": "George Vilnoiu", "student_id": "153"}, "test_student@amsterdam.tech": {"name": "Test Student", "student_id": "464"},
     "ify@amsterdam.tech": {"name": "Ify Genevieve", "student_id": "464"}, "naz.aydin@amsterdam.tech": {"name": "Naz Aydin", "student_id": "1214"},
     "riaz.ullah@amsterdam.tech": {"name": "Riaz Ullah", "student_id": "1208"}, "ricky.benschop@amsterdam.tech": {"name": "Ricky Benschop", "student_id": "1209"},
-    "isadora@amsterdam.tech": {"name": "Isadora Costa", "student_id": "2655"}
+    "isadora@amsterdam.tech": {"name": "Isadora Costa", "student_id": "2655"}, "henry@amsterdam.tech": {"name": "Henry Ukwu", "student_id": "1561"}
+    
 }
 
 
@@ -265,19 +266,41 @@ def student_dashboard():
                             feedback = st.session_state[f"feedback_{file_path}"]
                             suggestions = st.session_state[f"suggestions_{file_path}"]
                             
-                            st.subheader("View AI Feedback & Reflection Points")
-                            st.code(feedback, language=None)
+                            # Check if either feedback or suggestions is non-empty and non-null
+                            has_feedback = feedback is not None and feedback.strip() != ""
+                            has_suggestions = suggestions is not None and suggestions.strip() != ""
                             
-                            # Show rotating markdown message
-                            current_message = rotating_messages[st.session_state["message_index"]]
+                            if has_feedback or has_suggestions:
                             
-                            st.markdown(
-                              f"<span style='color:blue;'>{current_message} Reflect on these points to deepen your understanding and further enhance your work.</span>",
+                              st.subheader("View AI Feedback & Reflection Points")
+                              if has_feedback:
+                                st.code(feedback, language=None)
+                         
+                              # Show rotating markdown message
+                              current_message = rotating_messages[st.session_state["message_index"]]
+                            
+                              st.markdown(
+                                f"<span style='color:blue;'>{current_message} Reflect on these points to deepen your understanding and further enhance your work.</span>",
                                    unsafe_allow_html=True
                                )
+                                          
+                              if has_suggestions:
+                                st.code(suggestions, language=None)
                             
-                            st.code(suggestions, language=None)
+                              st.markdown(
+                                 f"<span style='color:purple; font-size:11px; font-style:italic; font-weight:bold;'>"
+                                 f"Note: This is AI-assisted guidance. Verify critical suggestions with your instructor."
+                                 f"</span>",
+                                     unsafe_allow_html=True
+                               )
 
+                            #   st.markdown(
+                            #     f"_<span style='color:purple;font-size:9px;'> <b>Note<b>: This is AI-assisted guidance. Verify critical suggestions with your instructor._</span>",
+                            #        unsafe_allow_html=True
+                            #    )
+                            else:
+                               st.info("No AI feedback or suggestions available for this file yet.")
+                                  
                             headers = {
                                 "Content-Type": "application/json; charset=utf-8",
                                 "Authorization": f"Bearer {slack_token}"
