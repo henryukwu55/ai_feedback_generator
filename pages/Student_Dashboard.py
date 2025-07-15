@@ -280,7 +280,7 @@ def student_dashboard():
                               current_message = rotating_messages[st.session_state["message_index"]]
                             
                               st.markdown(
-                                f"<span style='color:blue;'>{current_message} Reflect on these points to deepen your understanding and further enhance your work.</span>",
+                                f"<span style='color:blue;'>{current_message} Reflect on these major points to deepen your understanding and further enhance your work.</span>",
                                    unsafe_allow_html=True
                                )
                                           

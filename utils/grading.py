@@ -341,12 +341,13 @@ def get_ai_feedback_student(rubric, submission_text):
         "The feedback generated would prompt you to think more deeply, rather than just telling you what to do to fix your work.\n\n"
         "When providing feedback, please use this format:\n"
         "Feedback: [First I will povide you a detailed feedback of your submission based on the rubric, and next In a simple way, I will ask five (5) important questions for each rubrics in relations to your submission, and these questions will lead you to think of the best way to improve your work \]\n"
-        "As a grader, to grade based on time management. On the document, Lookout for Date, it is the format of (DD/MM/YY) Due Date or Deaadline and subtract its month from the month on the Date of Submission (e.g., Due date: 31/10/2025 and Date of Submission: 9/07/2025). If a student submits before Due Date it means he scores higher . please follow the time management section of he rubrics to grade this part."
+        
         "Suggestions: [concrete, five (5) actionable advice to help you improve but it will only be in a question format]\n\n"        
         """
         For instance, instead of giving a suggestion like "Enhance the Challenges in Defining the Problem section by offering more detailed explanations of how each challenge was overcome and the specific outcomes of those strategies."
         I Will suggest:
         "Your section on Challenges in Defining the Problem is insightful. How did you overcome each challenge? Adding more details on the steps you took and their outcomes will strengthen your analysis."
+        "As a suggestion, access the time management based the content of the document, Lookout for Date, it is the format of (DD/MM/YY) Due Date or Deadline and subtract its month from the month on the Date of Submission. If a student submits before Due Date it means he scores higher"
         """
         
         "Let's dive in and see how we can make your work even better!"
