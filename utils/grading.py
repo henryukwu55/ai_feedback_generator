@@ -4815,21 +4815,789 @@ Submitted more than two weeks after deadline expired
 --
 
 
-
 Total Points: 30
 """
 
-      )   
+      ),
+         
+          "M7 W1 Assignment: Designing a Change Narrative – A Case-Based Approach to Understanding Change": (  
+         
+         """
+Criteria	Ratings	Pts
+ This criterion is linked to a Learning OutcomeDemonstrate understanding of change management principles, strategies, and tools to analyse the impact of change and develop comprehensive change management plans.
+threshold: 3	
+5 pts
+Excellent
+4 pts
+Very Good
+3 pts
+Satisfactory
+2 pts
+Fair
+1 pts
+Poor
+
+Add Additional Comments
+Scenario Relevance and Realism
+5 pts
+Excellent
+Scenario is highly realistic, well-crafted, and clearly grounded in a current tech context. The disruption is compelling and plausible.
+4 pts
+Very Good
+Scenario is realistic and relevant, with minor gaps in clarity or detail. Grounding in tech context is evident.
+3 pts
+Satisfactory
+Scenario is somewhat realistic but lacks depth or specificity. Some tech relevance present.
+2 pts
+Fair
+Scenario lacks realism or clarity. Minimal connection to a tech-driven environment.
+1 pts
+Poor
+Scenario is vague, unrealistic, or missing. No clear tech context.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Diagnosis of Change Type
+5 pts
+Excellent
+Accurately identifies and explains relevant change types using course frameworks. Shows strong conceptual understanding.
+4 pts
+Very Good
+Correctly identifies change types with clear explanation, using course concepts appropriately.
+3 pts
+Satisfactory
+Change types are identified but may lack clarity or depth in application.
+2 pts
+Fair
+Limited or unclear identification of change types; weak application of frameworks.
+1 pts
+Poor
+Change type is missing, incorrect, or shows no connection to course concepts.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Strategy Quality and Alignment
+5 pts
+Excellent
+Strategy is comprehensive, coherent, and directly addresses the disruption. Clear vision, stakeholders, and actions are well aligned with change principles.
+4 pts
+Very Good
+Strategy is strong and mostly complete, with minor gaps. Aligns well with change management best practices.
+3 pts
+Satisfactory
+Strategy is somewhat aligned but lacks depth or full coherence. May be missing one or two key elements.
+2 pts
+Fair
+Strategy is underdeveloped or disconnected from the disruption. Key components are weak or unclear.
+1 pts
+Poor
+Strategy is missing or fails to address the disruption. No alignment with change management principles.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Addressing Human Factors and Resistance
+5 pts
+Excellent
+Insightful identification and handling of human resistance. Tactics are thoughtful, realistic, and rooted in theory.
+4 pts
+Very Good
+Identifies relevant human factors and suggests plausible approaches to manage resistance.
+3 pts
+Satisfactory
+Acknowledges resistance but with limited depth or specificity.
+2 pts
+Fair
+Limited or vague discussion of human resistance; superficial or generic solutions.
+1 pts
+Poor
+Fails to identify or address human aspects of change. No engagement with resistance.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Total Points: 0 out of 20         
          
          
+         """
+        
+        ),  
+          
+          
+          
+          "M7 W2 Assignment: Analyzing and Enhancing GreenTech Inc.'s Sustainability Initiative": (  
+         
+         """
+
+Criteria	Ratings	Pts
+ This criterion is linked to a Learning OutcomeEvaluate and select appropriate change management frameworks and apply them to guide organisational change efforts.
+threshold: 3	
+5 pts
+Excellent
+4 pts
+Very Good
+3 pts
+Satisfactory
+2 pts
+Fair
+1 pts
+Poor
+
+Add Additional Comments
+Application of Change Management Concepts(Burning Platform, Guiding Coalition, Vision)
+5 pts
+Excellent
+Demonstrates a deep understanding of change frameworks; applies concepts accurately and creatively to the scenario.
+4 pts
+Very Good
+Applies relevant frameworks effectively; minor gaps in depth or originality.
+3 pts
+Satisfactory
+Applies frameworks adequately; understanding is basic but clear.
+2 pts
+Fair
+Shows limited understanding; application is superficial or partially incorrect.
+1 pts
+Poor
+Misunderstands or misapplies key frameworks; lacks coherence.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Strategic Thinking and Relevance to Organisational Context
+5 pts
+Excellent
+Clearly aligns proposed actions with the disruption scenario; stakeholder roles, metrics, and vision are highly relevant and compelling.
+4 pts
+Very Good
+Actions and elements are mostly aligned with scenario; some depth in role/context understanding.
+3 pts
+Satisfactory
+Basic alignment with context; rationale may be vague or generic.
+2 pts
+Fair
+Weak relevance to the organisational scenario; unclear or mismatched elements.
+1 pts
+Poor
+No clear connection to the scenario; disjointed or irrelevant content.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Quality of Analysis and Stakeholder Mapping(Influence Map + RACI Matrix)
+5 pts
+Excellent
+Insightful and strategic stakeholder analysis; roles and responsibilities are realistic and well-mapped.
+4 pts
+Very Good
+Good stakeholder insight; Influence Map and RACI Matrix are mostly accurate and useful.
+3 pts
+Satisfactory
+Stakeholder roles and maps are understandable but lack nuance.
+2 pts
+Fair
+Minimal or unclear stakeholder analysis; inaccuracies in Influence Map or RACI Matrix.
+1 pts
+Poor
+Poorly constructed or missing stakeholder analysis; little to no strategic value.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Clarity, Structure, and Communication(Vision statement + storytelling)
+5 pts
+Excellent
+Vision is clear, inspiring, and well-articulated; storytelling is compelling and effectively communicates change purpose.
+4 pts
+Very Good
+Vision and story are clear and relevant; minor improvements could enhance impact.
+3 pts
+Satisfactory
+Vision is understandable; storytelling meets expectations but lacks engagement.
+2 pts
+Fair
+Vision and story are confusing or flat; poor communication of purpose.
+1 pts
+Poor
+Lacks a coherent vision or story; unclear or incomplete communication.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Total Points: 0 out of 20
+         
+         """
+        ), 
+          
+          
+          
+          
+          "M7 W3 Assignment: Leading Through Resistance": (  
+         
+         """
+
+Criteria	Ratings	Pts
+ This criterion is linked to a Learning OutcomeIdentify and address sources of resistance to change within organisations, leveraging effective strategies and communication.
+threshold: 3	
+5 pts
+Excellent
+4 pts
+Very Good
+3 pts
+Satisfactory
+2 pts
+Fair
+1 pts
+Poor
+
+Add Additional Comments
+Identification and Analysis of Resistance (Step 5)
+5 pts
+Excellent
+Insightfully identifies three well-articulated, relevant sources of resistance with nuanced understanding of organizational dynamics. Force Field Analysis is clear, strategic, and actionable.
+4 pts
+Very Good
+Identifies three appropriate sources of resistance with solid analysis. Force Field Analysis is mostly clear and actionable.
+3 pts
+Satisfactory
+Identifies basic sources of resistance with some explanation. Force Field Analysis is present but lacks depth or clarity.
+2 pts
+Fair
+Sources of resistance are weakly defined or not clearly tied to context. Force Field Analysis is incomplete or superficial.
+1 pts
+Poor
+Sources of resistance are missing or inappropriate. No Force Field Analysis or irrelevant elements included.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Effectiveness of Strategies and Communication (Steps 4 & 5)
+5 pts
+Excellent
+Proposes highly effective, context-sensitive strategies for communicating the vision and reducing resistance. Demonstrates advanced use of change communication principles.
+4 pts
+Very Good
+Proposes solid strategies with good alignment to organizational context. Communication approach is thoughtful and mostly effective.
+3 pts
+Satisfactory
+Proposes general strategies with moderate relevance. Communication plan shows basic understanding of best practices.
+2 pts
+Fair
+Strategies are vague or lack relevance to the scenario. Communication plan is incomplete or underdeveloped.
+1 pts
+Poor
+Strategies and communication approaches are missing, ineffective, or misaligned.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Design of Quick Wins (Step 6)
+5 pts
+Excellent
+Quick Wins are innovative, well-aligned with vision, emotionally resonant, and clearly achievable. Strong plan for celebrating and leveraging wins.
+4 pts
+Very Good
+Quick Wins are well aligned, realistic, and communicated with care. Some emotional impact and visibility present.
+3 pts
+Satisfactory
+Quick Wins are basic but feasible. Some attempt to link to vision and celebrate outcomes.
+2 pts
+Fair
+Quick Wins lack feasibility, clarity, or emotional relevance. Weak or missing communication plan.
+1 pts
+Poor
+No meaningful Quick Wins proposed. Poor or absent linkage to vision and communication.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Clarity, Structure, and Practicality of the Memo
+5 pts
+Excellent
+Memo is exceptionally well-structured, concise, and practical. Uses professional tone and headings to guide reader smoothly.
+4 pts
+Very Good
+Memo is well-written and organized. Mostly clear and easy to follow. Practical recommendations included.
+3 pts
+Satisfactory
+Memo is understandable with some structure. Some practical recommendations present.
+2 pts
+Fair
+Memo lacks clarity or structure. Hard to follow or too theoretical.
+1 pts
+Poor
+Memo is unclear, disorganized, or not aligned with the task. Lacks practical value.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Total Points: 0 out of 20         
+         """
+        ), 
+          
+          
+          
+          
+          "Module 7 Project: Strategic Change Management for the Future": (  
+         
+         """
+
+Criteria	Ratings	Pts
+ This criterion is linked to a Learning OutcomeDevelop strategies to enhance organisational resilience in dynamic environments.
+threshold: 3	
+5 pts
+Excellent
+4 pts
+Very Good
+3 pts
+Satisfactory
+2 pts
+Fair
+1 pts
+Poor
+
+Add Additional Comments
+Strategic Design of Change Simulation
+5 pts
+Excellent
+Scenario is highly realistic, context-rich, and challenges participants to lead under pressure. Demonstrates deep strategic thinking.
+4 pts
+Very Good
+Scenario is clear and relevant, with good complexity and decision points. Well-aligned with real-world change contexts.
+3 pts
+Satisfactory
+Scenario is plausible but lacks depth or richness in challenge and realism.
+2 pts
+Fair
+Scenario is simplistic or unclear; lacks strategic framing or critical tension.
+1 pts
+Poor
+Scenario is vague, unrealistic, or fails to convey meaningful transformation.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Integration of Change Management Principles (Kotter’s Steps)
+5 pts
+Excellent
+Skillful integration of Kotter’s 8 steps, especially steps 4–8. Decision points and actions reflect deep understanding of sustainable change.
+4 pts
+Very Good
+Most change steps are applied clearly and meaningfully. Good use of decision points for participant action.
+3 pts
+Satisfactory
+Key steps are included, but links to simulation actions may be generic or shallow.
+2 pts
+Fair
+Limited or superficial reference to change principles. Misses key leadership moments.
+1 pts
+Poor
+Kotter’s model is poorly or not applied. No clear connection to managing change.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Addressing Organisational Tensions and Barriers
+5 pts
+Excellent
+Demonstrates nuanced understanding of cultural and operational resistance. Tensions are well-embedded and support resilience-building.
+4 pts
+Very Good
+Relevant tensions are addressed with moderate depth. Shows awareness of organisational realities.
+3 pts
+Satisfactory
+Some tensions are included but not fully explored or realistic.
+2 pts
+Fair
+Few or forced tensions; lacks understanding of barriers to resilience.
+1 pts
+Poor
+Tensions are missing or irrelevant to real-world change dynamics.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Anchoring and Reflection Framework
+5 pts
+Excellent
+Anchoring exercises and debrief questions are insightful, well-designed, and promote behavioural and systemic change.
+4 pts
+Very Good
+Reflection and anchoring components are clear and effective in supporting learning.
+3 pts
+Satisfactory
+Includes basic reflection and anchoring elements; may lack originality or depth.
+2 pts
+Fair
+Reflection moments are weak or disconnected from core learning goals.
+1 pts
+Poor
+No meaningful reflection or anchoring. Debrief is absent or off-topic.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Total Points: 0 out of 20
+         
+         """
+        ), 
+          
+          
+          
+          
+          "M8 W2 Assignment: Designing Governance for a Mixed Scrum-Kanban Environment": (  
+         
+         """
+
+Criteria	Ratings	Pts
+ This criterion is linked to a Learning OutcomeApply collaborative, adaptable, and results-driven leadership strategies within a technology context as an Agile Leader.
+threshold: 3	
+5 pts
+Excellent
+4 pts
+Very Good
+3 pts
+Satisfactory
+2 pts
+Fair
+1 pts
+Poor
+
+Add Additional Comments
+Governance Model Alignment & Effectiveness
+5 pts
+Excellent
+Governance model is robust, context-specific, and facilitates seamless delivery between Scrum and Kanban. Ceremonies, roles, and metrics are well-justified and enable results-driven leadership.
+4 pts
+Very Good
+Model is clear and mostly appropriate; strong alignment between frameworks. Minor gaps in justification or detail.
+3 pts
+Satisfactory
+Model meets basic requirements but lacks specificity or strong rationale. Some elements underdeveloped.
+2 pts
+Fair
+Governance model is incomplete or unclear. Important artefacts or metrics are missing or misapplied.
+1 pts
+Poor
+Model is vague or generic. Lacks understanding of how governance enables Agile delivery.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Adaptability & Agile-Principle Integration
+5 pts
+Excellent
+Demonstrates strong understanding of Agile mind-set. Anticipates friction points and addresses them with adaptable strategies grounded in principles from Week 2.
+4 pts
+Very Good
+Good integration of Agile principles. Reasonable adaptability shown. Minor mismatches or missed opportunities.
+3 pts
+Satisfactory
+Covers basic Agile concepts. Adaptability is minimal or reactive. Principles are stated more than applied.
+2 pts
+Fair
+Weak link to Agile principles. Adaptability is superficial or forced. Misses key tensions.
+1 pts
+Poor
+No meaningful connection to Agile principles. Model is rigid or incoherent in Agile context.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Collaboration & Stakeholder Alignment
+5 pts
+Excellent
+Clearly shows how the model fosters collaboration across teams and ensures stakeholder alignment. Includes effective escalation/reporting processes.
+4 pts
+Very Good
+Mostly effective collaboration strategy; minor gaps in stakeholder communication or dependency handling.
+3 pts
+Satisfactory
+Collaboration mechanisms are present but not well integrated. Stakeholder roles may be unclear.
+2 pts
+Fair
+Limited collaboration or siloed thinking. Stakeholder needs or cross-team dependencies not well addressed.
+1 pts
+Poor
+Lacks collaborative planning or stakeholder alignment. Ignores inter-team communication needs.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Leadership Reflection & Behaviour Rationale
+5 pts
+Excellent
+Reflection shows deep understanding of Agile leadership behaviours. Clearly links traits like servant leadership or HiPPO-avoidance to cultural enablers.
+4 pts
+Very Good
+Solid reflection. Connects relevant leadership traits to team performance, though not deeply explored.
+3 pts
+Satisfactory
+Mentions leadership behaviours but lacks meaningful connection to the model or context.
+2 pts
+Fair
+Superficial or generic reflection. Minimal insight into Agile leadership.
+1 pts
+Poor
+No reflection or irrelevant comments on leadership.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Total Points: 0 out of 20
+
+         
+         """
+        ), 
+          
+          
+          
+          
+          "M8 W1 Assignment: Attracting R&D Talent": (  
+         
+         """
+
+Criteria	Ratings	Pts
+ This criterion is linked to a Learning OutcomeDemonstrate a deep understanding of modern approaches to effective leadership in the technology domain, with a specific focus on Servant Leadership principles.
+threshold: 3	
+5 pts
+Excellent
+4 pts
+Very Good
+3 pts
+Satisfactory
+2 pts
+Fair
+1 pts
+Poor
+
+Add Additional Comments
+Application of Servant Leadership Principles
+5 pts
+Excellent
+Demonstrates sophisticated and integrated use of servant leadership principles (e.g., empathy, empowerment). Shows deep insight into leadership in a tech context.
+4 pts
+Very Good
+Applies servant leadership appropriately with some integration into the strategy. Minor gaps in depth or clarity.
+3 pts
+Satisfactory
+Basic reference to servant leadership principles. Application is present but not fully integrated.
+2 pts
+Fair
+Limited or inconsistent use of servant leadership ideas. Lacks clear connection to leadership role.
+1 pts
+Poor
+No or incorrect application of servant leadership. Principles are missing or misused.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Diagnosis of Change and Anticipation of Resistance
+5 pts
+Excellent
+Clear and accurate classification of change. Resistance points are well-analyzed and show deep understanding of human behavior in change.
+4 pts
+Very Good
+Diagnosis is mostly accurate. Resistance points are valid, though may lack some depth.
+3 pts
+Satisfactory
+Basic diagnosis is present. Some resistance points are identified, but not well-developed.
+2 pts
+Fair
+Diagnosis is vague or somewhat inaccurate. Resistance analysis is weak or underdeveloped.
+1 pts
+Poor
+Misdiagnosis or lack of classification. Resistance is not addressed or misunderstood.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Strategic Thinking and Design of Change Approach
+5 pts
+Excellent
+Strategy is well-structured, innovative, and actionable. Includes proactive, human-centered design elements (e.g., psychological safety, Shu-Ha-Ri).
+4 pts
+Very Good
+Strategy is logical and structured. Addresses key areas with some originality.
+3 pts
+Satisfactory
+Strategy covers required elements but may lack depth or originality.
+2 pts
+Fair
+Strategy is basic or generic. Lacks proactive elements or clarity in design.
+1 pts
+Poor
+Strategy is incomplete, incoherent, or missing key elements.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Integration of Agile Leadership Concepts
+5 pts
+Excellent
+Agile leadership ideas (e.g., squads, psychological safety) are deeply embedded and effectively used. Strong parallels to ING or relevant frameworks.
+4 pts
+Very Good
+Agile concepts are integrated and relevant. Application is good but not consistently deep.
+3 pts
+Satisfactory
+Agile leadership ideas are referenced but may not be fully applied or connected.
+2 pts
+Fair
+Limited or unclear application of Agile leadership principles.
+1 pts
+Poor
+No or incorrect use of Agile leadership frameworks.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Total Points: 0 out of 20
          
          
+         """
+        ), 
+          
+          
+          
+          
+          "M8 W3 Assignment: Agile Practices": (  
          
+         """
+
+Criteria	Ratings	Pts
+ This criterion is linked to a Learning OutcomeUtilise Agile leadership principles to enhance collaboration, adaptability, and team performance within technology projects or initiatives, emphasising Agile teams.
+threshold: 3	
+5 pts
+Excellent
+4 pts
+Very Good
+3 pts
+Satisfactory
+2 pts
+Fair
+1 pts
+Poor
+
+Add Additional Comments
+Analysis of Agile Leadership Patterns
+5 pts
+Excellent
+Insightful, well-structured diagnosis using appropriate frameworks (e.g., Agile archetypes, Spotify model). Shows deep understanding of leadership behaviors and how they impact agility.
+4 pts
+Very Good
+Strong diagnosis with relevant frameworks; minor gaps in linking patterns to agility impact.
+3 pts
+Satisfactory
+General analysis of leadership patterns; some limited connection to Agile principles.
+2 pts
+Fair
+Limited or vague pattern identification; weak connection to Agile context.
+1 pts
+Poor
+Lacks analysis or misinterprets Agile leadership patterns.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Application of Agile Principles to Identify Challenges and Impacts
+5 pts
+Excellent
+Identifies a nuanced, real-world challenge clearly tied to Agile leadership. Strong evidence of impact on collaboration, adaptability, or team performance.
+4 pts
+Very Good
+Identifies a realistic challenge and links it to Agile leadership and team performance with some depth.
+3 pts
+Satisfactory
+Presents a challenge but lacks strong evidence of Agile connection or impact clarity.
+2 pts
+Fair
+Vague or superficial challenge with minimal reference to Agile impact.
+1 pts
+Poor
+Challenge is irrelevant, unclear, or not connected to Agile principles.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Actionable and Aligned Improvement Plan
+5 pts
+Excellent
+Practical, innovative plan grounded in Agile values. Includes mindset shifts, structures, and metrics. Shows clear path to enhancing team autonomy and adaptability.
+4 pts
+Very Good
+Thoughtful and mostly actionable plan with strong alignment to Agile principles and improvement goals.
+3 pts
+Satisfactory
+Plan covers key points but lacks depth or strong alignment with Agile transformation strategies.
+2 pts
+Fair
+Plan is partially relevant or lacks clear actions and Agile alignment.
+1 pts
+Poor
+Plan is incomplete, unrealistic, or not connected to Agile principles.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Critical Reflection & Synthesis of Concepts
+5 pts
+Excellent
+Sharp reflection linking theory (e.g., Dual OS, archetypes) to context. Demonstrates critical thinking and anticipates risks with thoughtful mitigation.
+4 pts
+Very Good
+Reflective, clear link to concepts, and some insight into risks and mitigation.
+3 pts
+Satisfactory
+Adequate reflection with basic understanding of theory and risks.
+2 pts
+Fair
+Minimal reflection; weak connection to course concepts or lack of insight.
+1 pts
+Poor
+No meaningful reflection or conceptual connection.
+Points
+
+/ 5 pts
+
+Add Additional Comments
+Total Points: 0 out of 20
          
-         
-         
-         
-         
+         """
+        )
+          
+          
+          
+       
          
          
     
