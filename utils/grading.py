@@ -5487,7 +5487,7 @@ Total Points: 0 out of 20
           
           
           
-          "M8 W3 Assignment: Agile Practices": (  
+          "M8 W3 Assignment: Diagnosing & Elevating Agile Leadership in Action": (  
          
          """
 
