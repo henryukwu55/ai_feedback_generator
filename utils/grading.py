@@ -5152,7 +5152,7 @@ Total Points: 0 out of 20
           
           
           
-          "Module 7 Project: Strategic Change Management for the Future": (  
+          "Module 7 Project: Leading Through Change – Immersive Simulation Design": (  
          
          """
 
