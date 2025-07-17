@@ -272,7 +272,7 @@ def get_ai_feedback(rubric, submission_text):
     Generate AI-based feedback with enhanced scoring format
     """
     system_prompt = """You are an expert grading assistant. Analyze the student submission 
-    strictly against the provided rubric. Format your response as:
+    against the provided rubric. Format your response as:
     
     Grade: [sum/Total score from rubric (e.g., 12/15 or 85/100 and     This denominator of the grade is the total sum of the rubric scores)]
     Feedback: [Criterion-based feedback with individual scores]
