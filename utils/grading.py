@@ -4931,7 +4931,7 @@ Total Points: 0 out of 20
           
           
           
-          "M7 W2 Assignment: Analyzing and Enhancing GreenTech Inc.'s Sustainability Initiative": (  
+          "M7 W2 Assignment: From Idea to Alignment – Building Early-Stage Change Plans": (  
          
          """
 
@@ -5375,7 +5375,7 @@ Total Points: 0 out of 20
           
           
           
-          "M8 W1 Assignment: Attracting R&D Talent": (  
+          "M8 W1 Assignment: From Resistance to Reinvention: Crafting a Change-Management Draft Strategy in a Tech-Driven EnvironmentIntroduction": (  
          
          """
 
