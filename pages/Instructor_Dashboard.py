@@ -156,7 +156,14 @@ records_staff = {
     "jozsef.dudas@elu.nl": {"name": "Dudás József", "student_id": "403"},
     "viktor.rodau@elu.nl": {"name": "Viktor Rodau", "student_id": "181"},
     "isadora@amsterdam.tech": {"name": "Isadora Costa", "student_id": "2655"},
-    "henry@amsterdam.tech": {"name": "Henry Ukwu", "student_id": "1561"}
+    "henry@amsterdam.tech": {"name": "Henry Ukwu", "student_id": "1561"},
+    
+    "samet.bayraktar@amsterdam.tech": {"name": "Samet Bayraktar", "student_id": "2082"}, "adrian.sanchez@amsterdam.tech": {"name": "Adrian Sanchez", "student_id": "2089"},
+    "bekir.bozturk@amsterdam.tech": {"name": "Bekir Bozturk", "student_id": "2085"}, "bui.tuan@amsterdam.tech": {"name": "Bui Tuan", "student_id": "2091"},
+    "cagla.bastug@amsterdam.tech": {"name": "Cagla Bastug", "student_id": "2083"}, "henrique.cruz@amsterdam.tech": {"name": "Henrique Cruz", "student_id": "2087"},
+    "erhan.altintas@amsterdam.tech": {"name": "Erhan Altintas", "student_id": "2077"}, "ismail.aydemir@amsterdam.tech": {"name": "Ismail Aydemir", "student_id": "2084"},
+    "karina.khachaturian@amsterdam.tech": {"name": "Karina Khachaturian", "student_id": "2088"}, "onur.gungor@amsterdam.tech": {"name": "Onur Gungor", "student_id": "2081"},
+    "rabindra.phuyal@amsterdam.tech": {"name": "Rabindra Phuyal", "student_id": "2090"}
 }
 
 def get_user_details(email):
