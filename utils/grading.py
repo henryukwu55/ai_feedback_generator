@@ -4824,7 +4824,9 @@ Total Points: 30
          
          """
 Criteria	Ratings	Pts
- This criterion is linked to a Learning OutcomeDemonstrate understanding of change management principles, strategies, and tools to analyse the impact of change and develop comprehensive change management plans.
+ This criterion is linked to a Learning Outcome
+ 
+Demonstrate understanding of change management principles, strategies, and tools to analyse the impact of change and develop comprehensive change management plans.
 threshold: 3	
 5 pts
 Excellent
@@ -4936,7 +4938,9 @@ Total Points: 0 out of 20
          """
 
 Criteria	Ratings	Pts
- This criterion is linked to a Learning OutcomeEvaluate and select appropriate change management frameworks and apply them to guide organisational change efforts.
+ This criterion is linked to a Learning Outcome
+ 
+Evaluate and select appropriate change management frameworks and apply them to guide organisational change efforts.
 threshold: 3	
 5 pts
 Excellent
@@ -5047,7 +5051,9 @@ Total Points: 0 out of 20
          """
 
 Criteria	Ratings	Pts
- This criterion is linked to a Learning OutcomeIdentify and address sources of resistance to change within organisations, leveraging effective strategies and communication.
+ This criterion is linked to a Learning Outcome
+ 
+Identify and address sources of resistance to change within organisations, leveraging effective strategies and communication.
 threshold: 3	
 5 pts
 Excellent
@@ -5157,7 +5163,9 @@ Total Points: 0 out of 20
          """
 
 Criteria	Ratings	Pts
- This criterion is linked to a Learning OutcomeDevelop strategies to enhance organisational resilience in dynamic environments.
+ This criterion is linked to a Learning Outcome
+ 
+Develop strategies to enhance organisational resilience in dynamic environments.
 threshold: 3	
 5 pts
 Excellent
@@ -5268,7 +5276,9 @@ Total Points: 0 out of 20
          """
 
 Criteria	Ratings	Pts
- This criterion is linked to a Learning OutcomeApply collaborative, adaptable, and results-driven leadership strategies within a technology context as an Agile Leader.
+ This criterion is linked to a Learning Outcome
+ 
+Apply collaborative, adaptable, and results-driven leadership strategies within a technology context as an Agile Leader.
 threshold: 3	
 5 pts
 Excellent
@@ -5380,7 +5390,9 @@ Total Points: 0 out of 20
          """
 
 Criteria	Ratings	Pts
- This criterion is linked to a Learning OutcomeDemonstrate a deep understanding of modern approaches to effective leadership in the technology domain, with a specific focus on Servant Leadership principles.
+ This criterion is linked to a Learning Outcome
+ 
+Demonstrate a deep understanding of modern approaches to effective leadership in the technology domain, with a specific focus on Servant Leadership principles.
 threshold: 3	
 5 pts
 Excellent
@@ -5492,7 +5504,9 @@ Total Points: 0 out of 20
          """
 
 Criteria	Ratings	Pts
- This criterion is linked to a Learning OutcomeUtilise Agile leadership principles to enhance collaboration, adaptability, and team performance within technology projects or initiatives, emphasising Agile teams.
+This criterion is linked to a Learning Outcome
+
+Utilise Agile leadership principles to enhance collaboration, adaptability, and team performance within technology projects or initiatives, emphasising Agile teams.
 threshold: 3	
 5 pts
 Excellent
